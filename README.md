@@ -23,7 +23,7 @@ allprojects{
 
 ```
 dependencies {
-  implementation 'com.github.Ichchhie:Baato-Library:0.9.0'
+  implementation 'com.github.Ichchhie:Baato-Android-Library:0.1.0'
 }
 ```
 
