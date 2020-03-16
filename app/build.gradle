@@ -31,6 +31,9 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
+    // baato library
+    implementation project(':baatolibrary')
+
     //toaster library
-    implementation 'com.github.Ichchhie:Toaster-Library:0.8.0'
+//    implementation 'com.github.Ichchhie:Toaster-Library:0.8.0'
 }

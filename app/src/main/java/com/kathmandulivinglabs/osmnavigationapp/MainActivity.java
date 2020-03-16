@@ -5,12 +5,19 @@ import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.kathmandulivinglabs.navigationlibrary.models.Geocode;
-import com.kathmandulivinglabs.navigationlibrary.models.Geometry;
-import com.kathmandulivinglabs.navigationlibrary.models.Place;
-import com.kathmandulivinglabs.navigationlibrary.services.BaatoReverseGeoCodeService;
-import com.kathmandulivinglabs.navigationlibrary.services.ToasterMessage;
-import com.kathmandulivinglabs.navigationlibrary.utilities.BaatoUtil;
+import com.kathmandulivinglabs.baatolibrary.models.Geocode;
+import com.kathmandulivinglabs.baatolibrary.models.Geometry;
+import com.kathmandulivinglabs.baatolibrary.models.Place;
+import com.kathmandulivinglabs.baatolibrary.services.BaatoReverseGeoCode;
+import com.kathmandulivinglabs.baatolibrary.services.BaatoSearch;
+import com.kathmandulivinglabs.baatolibrary.services.ToasterMessage;
+import com.kathmandulivinglabs.baatolibrary.utilities.BaatoUtil;
+//import com.kathmandulivinglabs.navigationlibrary.models.Geocode;
+//import com.kathmandulivinglabs.navigationlibrary.models.Geometry;
+//import com.kathmandulivinglabs.navigationlibrary.models.Place;
+//import com.kathmandulivinglabs.navigationlibrary.services.BaatoReverseGeoCodeService;
+//import com.kathmandulivinglabs.navigationlibrary.services.ToasterMessage;
+//import com.kathmandulivinglabs.navigationlibrary.utilities.BaatoUtil;
 
 import java.util.List;
 
@@ -27,14 +34,15 @@ public class MainActivity extends AppCompatActivity {
         Geometry geometry = BaatoUtil.getGeoJsonFromEncodedPolyLine(encoded);
 
         performReverseGeoCoding();
+        performSearch();
     }
 
     private void performReverseGeoCoding() {
-        new BaatoReverseGeoCodeService(this)
+        new BaatoReverseGeoCode(this)
                 .setGeoCode(new Geocode(27.73405, 85.33685))
                 .setAccessToken(Constants.TOKEN)
                 .setRadius(2)
-                .withListener(new BaatoReverseGeoCodeService.BaatoReverseGeoCodeRequestListener() {
+                .withListener(new BaatoReverseGeoCode.BaatoReverseGeoCodeRequestListener() {
                     @Override
                     public void onSuccess(List<Place> places) {
                         Log.d(TAG, "onSuccess: " + places.size());
@@ -48,6 +56,28 @@ public class MainActivity extends AppCompatActivity {
                     }
                 })
                 .doReverseGeoCode();
+    }
+
+    private void performSearch() {
+        new BaatoSearch(this)
+                .setAccessToken(Constants.TOKEN)
+                .setQuery("Kathmandu Living Labs")
+                .withListener(new BaatoSearch.BaatoSearchRequestListener() {
+                    @Override
+                    public void onSuccess(List<Place> places) {
+                        // get the list of search results here
+                        Log.d(TAG, "onSuccess: " + places.size());
+                        for (Place place : places)
+                            Log.d(TAG, "onSuccess:search " + place);
+                    }
+
+                    @Override
+                    public void onFailed(Throwable error) {
+                        // get the error messages here
+                        Log.d(TAG, "onFailed:search " + error.getMessage());
+                    }
+                })
+                .doSearch();
     }
 
 }
