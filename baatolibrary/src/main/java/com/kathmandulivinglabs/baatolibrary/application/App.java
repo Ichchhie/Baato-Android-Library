@@ -30,7 +30,7 @@ public class App extends Application {
 
     public static Retrofit retrofit(final String token) {
         Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl("http://178.128.59.143/api/v2/")
+                .baseUrl("http://178.128.59.143/api/v1/")
                 .addConverterFactory(GsonConverterFactory.create());
 
         OkHttpClient.Builder okHttpBuilder = new OkHttpClient.Builder();
@@ -49,6 +49,16 @@ public class App extends Application {
         builder.client(okHttpBuilder.build());
         Retrofit retrofit = builder.build();
         return retrofit;
+    }
+
+    public static Retrofit retrofitV2() {
+        Retrofit.Builder builder = new Retrofit.Builder()
+                .baseUrl("http://192.168.1.71:8080/api/v2/")
+                .addConverterFactory(GsonConverterFactory.create());
+
+
+        Retrofit retrofitV2 = builder.build();
+        return retrofitV2;
     }
 
     public static boolean isConnectedToNetwork(Context context) {

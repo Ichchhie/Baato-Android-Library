@@ -1,5 +1,7 @@
 package com.kathmandulivinglabs.baatolibrary.models;
 
+import androidx.annotation.NonNull;
+
 import java.util.List;
 
 public class SearchAPIResponse {
@@ -39,5 +41,15 @@ public class SearchAPIResponse {
 
     public void setData(List<Place> data) {
         this.data = data;
+    }
+
+    @Override
+    public String toString() {
+        return "SearchAPIResponse{" +
+                "timestamp='" + timestamp + '\'' +
+                ", status=" + status +
+                ", message='" + message + '\'' +
+                ", data=" + data +
+                '}';
     }
 }

@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 
 import com.kathmandulivinglabs.baatolibrary.application.App;
 import com.kathmandulivinglabs.baatolibrary.models.Place;
+import com.kathmandulivinglabs.baatolibrary.models.SearchAPIResponse;
 import com.kathmandulivinglabs.baatolibrary.requests.QueryAPI;
 
 import java.io.IOException;
@@ -25,7 +26,7 @@ public class BaatoSearch {
          * onSuccess method called after it is successful
          * onFailed method called if it can't places
          */
-        void onSuccess(List<Place> places);
+        void onSuccess(SearchAPIResponse places);
 
         void onFailed(Throwable error);
     }
@@ -62,10 +63,10 @@ public class BaatoSearch {
     }
 
     public void doSearch() {
-        QueryAPI queryAPI = App.retrofit(accessToken).create(QueryAPI.class);
-        queryAPI.searchQuery(query).enqueue(new Callback<List<Place>>() {
+        QueryAPI queryAPI = App.retrofitV2().create(QueryAPI.class);
+        queryAPI.searchQuery(accessToken, query).enqueue(new Callback<SearchAPIResponse>() {
             @Override
-            public void onResponse(Call<List<Place>> call, Response<List<Place>> response) {
+            public void onResponse(Call<SearchAPIResponse> call, Response<SearchAPIResponse> response) {
                 if (response.isSuccessful() && response.body() != null)
                     baatoSearchRequestListener.onSuccess(response.body());
                 else{
@@ -78,7 +79,7 @@ public class BaatoSearch {
             }
 
             @Override
-            public void onFailure(Call<List<Place>> call, Throwable throwable) {
+            public void onFailure(Call<SearchAPIResponse> call, Throwable throwable) {
                 baatoSearchRequestListener.onFailed(throwable);
             }
         });

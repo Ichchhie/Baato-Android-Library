@@ -7,19 +7,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.kathmandulivinglabs.baatolibrary.models.Geocode;
 import com.kathmandulivinglabs.baatolibrary.models.Geometry;
-import com.kathmandulivinglabs.baatolibrary.models.Place;
+
+import com.kathmandulivinglabs.baatolibrary.models.SearchAPIResponse;
 import com.kathmandulivinglabs.baatolibrary.services.BaatoReverseGeoCode;
 import com.kathmandulivinglabs.baatolibrary.services.BaatoSearch;
 import com.kathmandulivinglabs.baatolibrary.services.ToasterMessage;
 import com.kathmandulivinglabs.baatolibrary.utilities.BaatoUtil;
-//import com.kathmandulivinglabs.navigationlibrary.models.Geocode;
-//import com.kathmandulivinglabs.navigationlibrary.models.Geometry;
-//import com.kathmandulivinglabs.navigationlibrary.models.Place;
-//import com.kathmandulivinglabs.navigationlibrary.services.BaatoReverseGeoCodeService;
-//import com.kathmandulivinglabs.navigationlibrary.services.ToasterMessage;
-//import com.kathmandulivinglabs.navigationlibrary.utilities.BaatoUtil;
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,17 +34,16 @@ public class MainActivity extends AppCompatActivity {
         new BaatoReverseGeoCode(this)
                 .setGeoCode(new Geocode(27.73405, 85.33685))
                 .setAccessToken(Constants.TOKEN)
-                .setRadius(2)
                 .withListener(new BaatoReverseGeoCode.BaatoReverseGeoCodeRequestListener() {
                     @Override
-                    public void onSuccess(List<Place> places) {
-                        Log.d(TAG, "onSuccess: " + places.size());
-                        for (Place place : places)
-                            Log.d(TAG, "onSuccess:reverse " + place);
+                    public void onSuccess(SearchAPIResponse places) {
+                        // success response here
+                        Log.d(TAG, "onSuccess: reverse " + places.toString());
                     }
 
                     @Override
                     public void onFailed(Throwable error) {
+                        // failure response here
                         Log.d(TAG, "onFailed:reverse " + error.getMessage());
                     }
                 })
@@ -64,11 +56,9 @@ public class MainActivity extends AppCompatActivity {
                 .setQuery("Kathmandu Living Labs")
                 .withListener(new BaatoSearch.BaatoSearchRequestListener() {
                     @Override
-                    public void onSuccess(List<Place> places) {
+                    public void onSuccess(SearchAPIResponse places) {
                         // get the list of search results here
-                        Log.d(TAG, "onSuccess: " + places.size());
-                        for (Place place : places)
-                            Log.d(TAG, "onSuccess:search " + place);
+                        Log.d(TAG, "onSuccess:search " + places.toString());
                     }
 
                     @Override

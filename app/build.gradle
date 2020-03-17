@@ -34,6 +34,5 @@ dependencies {
     // baato library
     implementation project(':baatolibrary')
 
-    //toaster library
-//    implementation 'com.github.Ichchhie:Toaster-Library:0.8.0'
+
 }
