@@ -61,7 +61,7 @@ dependencies {
 ```
  new BaatoSearch(this)
           .setAccessToken(Constants.TOKEN)
-          .setQuery("Kathmandu Living Labs")
+          .setQuery(query)
           .withListener(new BaatoSearch.BaatoSearchRequestListener() {
               @Override
               public void onSuccess(SearchAPIResponse places) {
