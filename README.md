@@ -20,10 +20,18 @@ allprojects{
 ```
 
 2.Open up your application's build.gradle file. Add the following code:
+```
+android {
+ compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+ }
+```
 
 ```
 dependencies {
-  implementation 'com.github.Ichchhie:Baato-Android-Library:0.1.0'
+   implementation project(':baatolibrary')
 }
 ```
 
