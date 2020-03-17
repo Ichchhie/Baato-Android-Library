@@ -24,7 +24,6 @@ public class App extends Application {
         tinyDB = new TinyDB(getApplicationContext());
     }
 
-
     public static TinyDB db() {
         return tinyDB;
     }
@@ -50,6 +49,16 @@ public class App extends Application {
         builder.client(okHttpBuilder.build());
         Retrofit retrofit = builder.build();
         return retrofit;
+    }
+
+    public static Retrofit retrofitV2() {
+        Retrofit.Builder builder = new Retrofit.Builder()
+                .baseUrl("http://192.168.1.71:8080/api/v2/")
+                .addConverterFactory(GsonConverterFactory.create());
+
+
+        Retrofit retrofitV2 = builder.build();
+        return retrofitV2;
     }
 
     public static boolean isConnectedToNetwork(Context context) {
