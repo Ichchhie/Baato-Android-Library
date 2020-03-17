@@ -32,7 +32,7 @@ android {
 
 ```
 dependencies {
-   implementation project(':baatolibrary')
+   implementation 'com.github.Ichchhie:BaatoAndroidLibrary:0.1.0'
 }
 ```
 
