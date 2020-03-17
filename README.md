@@ -59,39 +59,42 @@ dependencies {
  #### 1. Search 
  
 ```
- new BaatoSearchService(this)
-                .setAccessToken("your-access-token")
-                .setQuery("your-query")
-                .withListener(new BaatoSearchService.BaatoSearchRequestListener() {
-                    @Override
-                    public void onSuccess(List<Place> places) {
-                      // get the list of search results here
-                    }
+ new BaatoSearch(this)
+          .setAccessToken(Constants.TOKEN)
+          .setQuery("Kathmandu Living Labs")
+          .withListener(new BaatoSearch.BaatoSearchRequestListener() {
+              @Override
+              public void onSuccess(SearchAPIResponse places) {
+                  // get the list of search results here
+                  Log.d(TAG, "onSuccess:search " + places.toString());
+              }
 
-                    @Override
-                    public void onFailed(Throwable error) {
-                      // get the error messages here
-                    }
-                })
-                .doSearch();
+              @Override
+              public void onFailed(Throwable error) {
+                  // get the error messages here
+                  Log.d(TAG, "onFailed:search " + error.getMessage());
+              }
+          })
+          .doSearch();
 
 ```
  #### 2. Reverse GeoCode
  
  ```
-new BaatoReverseGeoCodeService(this)
-                .setAccessToken("your-access-token")
-                .setGeoCode(new Geocode(lat, long))
-                .setRadius("your-radius")
-                .withListener(new BaatoReverseGeoCodeService.BaatoReverseGeoCodeRequestListener() {
+  new BaatoReverseGeoCode(this)
+                .setGeoCode(new Geocode(lat, lon))
+                .setAccessToken(Constants.TOKEN)
+                .withListener(new BaatoReverseGeoCode.BaatoReverseGeoCodeRequestListener() {
                     @Override
-                    public void onSuccess(List<Place> places) {
-                       // you can get the address from the first item of the list i.e. places.get(0)
+                    public void onSuccess(SearchAPIResponse places) {
+                        // success response here
+                        Log.d(TAG, "onSuccess: reverse " + places.toString());
                     }
 
                     @Override
                     public void onFailed(Throwable error) {
-                       // get the error messages here
+                        // failure response here
+                        Log.d(TAG, "onFailed:reverse " + error.getMessage());
                     }
                 })
                 .doReverseGeoCode();
