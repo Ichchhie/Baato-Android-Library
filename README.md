@@ -1,3 +1,5 @@
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/Ichchhie/Baato-Android-Library)
+
 # Baato-Library
 
 Fast and efficient library to perform search and reverse geocoding
@@ -16,7 +18,6 @@ allprojects{
   maven { url 'https://jitpack.io' }
  }
 }
-
 ```
 
 2.Open up your application's build.gradle file. Add the following code:
@@ -49,7 +50,6 @@ dependencies {
         ...
     </application>
 </manifest>
-
 ```
 2.In the res/xml/network_security_config.xml file, you can add localhost to the permitted cleartext traffic domain by adding:
 
@@ -84,7 +84,6 @@ dependencies {
               }
           })
           .doSearch();
-
 ```
  #### 2. Reverse GeoCode
  
@@ -106,7 +105,6 @@ dependencies {
                     }
                 })
                 .doReverseGeoCode();
-
 ```
 
 ## Built With
